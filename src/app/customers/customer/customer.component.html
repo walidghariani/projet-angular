@@ -1,0 +1,61 @@
+<mat-toolbar>
+  <span>{{customerService.form.controls['id'].value?"Edit Customer":"New Customer"}}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<mat-dialog style="height: 400px">
+<form [formGroup]="customerService.form" class="normal-form">
+  <mat-grid-list cols="1" rowHeight="700px">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <input type="hidden" formControlName="id">
+        <mat-form-field>
+          <input formControlName="firstName" matInput placeholder="First Name*">
+          <mat-error>Obligatory field</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="lastName" matInput placeholder="Last Name*">
+          <mat-error>Obligatory field</mat-error>
+        </mat-form-field>
+
+        <label id="gender-radio-group-label">Gender:</label>
+        <mat-radio-group formControlName="gender" aria-labelledby="gender-radio-group-label">
+          <mat-radio-button value="1">Male</mat-radio-button>
+          <mat-radio-button value="2">Female</mat-radio-button>
+        </mat-radio-group>
+
+        <mat-form-field>
+          <input formControlName="email" matInput placeholder="Email*">
+          <mat-error *ngIf="customerService.form.controls['email'].errors?.required">Obligatory field</mat-error>
+          <mat-error *ngIf="customerService.form.controls['email'].errors?.email">Invalid Email</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="address" matInput placeholder="Address*">
+          <mat-error>Obligatory field</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="city" matInput placeholder="City*">
+          <mat-error>Obligatory field</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="state" matInput placeholder="State*">
+          <mat-error>Obligatory field</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="orderTotal" matInput placeholder="Order Total*">
+          <mat-error>Obligatory field</mat-error>
+        </mat-form-field>
+        <div class="button-row">
+          <button mat-raised-button color="warn" (click) ="onClear()" >Clear</button>
+          <button mat-raised-button color="primary" type="submit"  (click) ="onSave()">Save</button>
+        </div>
+      </div>
+
+      <!--[disabled]="customerService.form.invalid"-->
+
+    </mat-grid-tile>
+  </mat-grid-list>
+
+</form>
+
+</mat-dialog>
